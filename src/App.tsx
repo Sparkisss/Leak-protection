@@ -1,11 +1,7 @@
-import './App.css';
+import { AppRoutes } from './app/providers/router/routes';
 
 function App() {
-  return (
-    <>
-      <div className="text-3xl">hello</div>
-    </>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
