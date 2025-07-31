@@ -1,5 +1,5 @@
 export const COLORS = {
-  primary: '#3B82F6', // blue-500
+  primary: '#AD1AAF', //ok on btn
   secondary: '#6B7280', // gray-500
   success: '#10B981', // green-500
   warning: '#F59E0B', // amber-500
@@ -9,7 +9,7 @@ export const COLORS = {
   infoBack: '#908294',
   customBack: '#FFFFFF1A', // // Linear gradient #FFFFFF(10%) #FFFFFF
   text: {
-    primary: '#FFFFFF', // gray-800
+    primary: '#FFFFFF', //
     secondary: '#F81DFB', // Linear gradient #FFFFFF #F81DFB
     inverse: '#FFFFFF',
   },
