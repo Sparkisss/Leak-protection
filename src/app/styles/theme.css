@@ -1,1 +1,6 @@
 /* Переменные, если используешь CSS-переменные */
+@import 'tailwindcss';
+
+.flex-center {
+  @apply flex items-center justify-center;
+}

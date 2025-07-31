@@ -4,7 +4,7 @@ import DashboardPage from '@/pages/DashboardPage/DashboardPage';
 import SettingsPage from '@/pages/SettingsPage/SettingsPage';
 import StatisticsPage from '@/pages/StatisticsPage/StatisticsPage';
 import NotFoundPage from '@/pages/NotFoundPage/NotFoundPage';
-import MainLayout from '@/widgets/layoyts/MainLayout';
+import MainLayout from '@/widgets/Layouts/MainLayout';
 import { BrowserRouter } from 'react-router';
 import { PrivateRoute } from '@/shared/lib/PrivateRoute';
 
