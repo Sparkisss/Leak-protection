@@ -1,6 +1,7 @@
+import { TYPOGRAPHY } from '@/shared/const/typography';
 import { NavLink } from 'react-router';
 interface MenuItem {
-  id: string;
+  id: number;
   title: string;
 }
 interface HeaderColumnProps {
@@ -13,7 +14,12 @@ const Navbar = ({ menu }: HeaderColumnProps) => {
       <ul className="flex-center gap-12 px-12 py-6">
         {menu.map(item => (
           <li key={item.id}>
-            <NavLink to={item.title.toLowerCase()}>{item.title}</NavLink>
+            <NavLink
+              className={TYPOGRAPHY.caption}
+              to={item.title.toLowerCase()}
+            >
+              {item.title}
+            </NavLink>
           </li>
         ))}
       </ul>
