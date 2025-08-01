@@ -21,10 +21,14 @@ export default function Input<E extends ElementType = typeof defaultElement>({
 }: InputProps<E>) {
   const TagName = as || defaultElement;
 
-  const classes = cn(className, {
-    primary,
-    secondary,
-  });
+  const classes = cn(
+    className,
+    'border-1 rounded-lg border border-gray-400 p-3 w-140 mb-15',
+    {
+      primary,
+      secondary,
+    }
+  );
 
   return <TagName className={classes} {...otherProps} />;
 }
