@@ -5,11 +5,15 @@ import { menuAbout, menuSupport } from '../config/footerMenu.config';
 
 const Footer = () => {
   return (
-    <footer className="flex items-start justify-between w-full gap-35">
-      <Logo />
-      <FooterBottom />
-      <FooterColumn menu={menuAbout} />
-      <FooterColumn menu={menuSupport} />
+    <footer className="flex flex-col justify-center items-center w-full gap-10 sm:flex-row sm:items-start">
+      <div className="flex justify-between gap-10">
+        <Logo />
+        <FooterBottom />
+      </div>
+      <div className="flex justify-between gap-10">
+        <FooterColumn menu={menuAbout} />
+        <FooterColumn menu={menuSupport} />
+      </div>
     </footer>
   );
 };

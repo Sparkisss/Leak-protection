@@ -9,12 +9,12 @@ interface FooterColumnProps {
 const FooterColumn = ({ menu }: FooterColumnProps) => {
   return (
     <nav>
-      <ul className="space-y-2">
+      <ul className=" md:space-y-2">
         {menu.map(item => (
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className="block whitespace-nowrap hover:underline"
+              className="block whitespace-nowrap hover:underline text-standart"
             >
               {' '}
               {item.label}
