@@ -1,6 +1,6 @@
 import Input from '@/shared/ui/Input/Input';
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   return (
     <form className="grid grid-cols-1 sm:grid-cols-2 place-items-center w-[80%] mx-auto">
       <Input
@@ -9,18 +9,10 @@ const RegistrationForm = () => {
       />
       <Input
         className="md:w-70 lg:w-90 xl:w-120 2xl:w-140"
-        placeholder="Surname"
-      />
-      <Input
-        className="md:w-70 lg:w-90 xl:w-120 2xl:w-140"
         placeholder="Password"
-      />
-      <Input
-        className="md:w-70 lg:w-90 xl:w-120 2xl:w-140"
-        placeholder="Password confirm"
       />
     </form>
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;
