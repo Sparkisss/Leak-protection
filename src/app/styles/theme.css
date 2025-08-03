@@ -4,3 +4,24 @@
 .flex-center {
   @apply flex items-center justify-center;
 }
+.icon-logo {
+  @apply w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12;
+}
+.icon-layout {
+  @apply w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7;
+}
+.text-standart {
+  @apply text-sm lg:text-base xl:text-lg;
+}
+.menu-burger-nav {
+  @apply fixed top-0 -left-[100%] flex w-60 h-full bg-white border-2 rounded border-cyan-700 shadow-2xl shadow-emerald-500 transform;
+}
+.menu-burger-nav-active {
+  @apply translate-x-[100%];
+}
+.menu-burger-list {
+  @apply flex pt-10 pl-12 text-amber-600 flex-col p-20;
+}
+.menu-burger-list-item {
+  @apply mx-2;
+}
