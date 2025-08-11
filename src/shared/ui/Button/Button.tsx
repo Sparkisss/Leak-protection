@@ -21,7 +21,7 @@ export default function Button<E extends ElementType = typeof defaultElement>({
   ...otherProps
 }: ButtonProps<E>) {
   const classes = cn(
-    'flex relative h-auto min-h-[40px] items-center cursor-pointer font-oxanium justify-center px-6 py-2.5 transition-colors duration-200 bg-[#AD1AAF]',
+    'flex relative h-auto text-[0.7rem] items-center cursor-pointer font-oxanium justify-center px-6 py-2.5 transition-colors duration-200 bg-[#AD1AAF] sm:text-md',
     { primary, secondary }
   );
   const TagName = as || defaultElement;

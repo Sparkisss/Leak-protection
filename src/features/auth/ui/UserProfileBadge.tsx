@@ -14,7 +14,7 @@ const UserProfileBadge = () => {
           </div>
           <div className="p-3 rounded-full bg-gradient-to-b from-white/10 to-white/0 backdrop-blur-3xl">
             <img
-              src="/icon/addPhoto.svg"
+              src="/icons/addPhoto.svg"
               alt="Change icon"
               className="w-5 h-5 opacity-80"
             />
