@@ -1,5 +1,6 @@
 import { TYPOGRAPHY } from '@/shared/const/typography';
-import { IconMenu } from '@/shared/ui/icons/IconMenu';
+import { IconClose } from '@/shared/ui/Icons/IconClose';
+import { IconMenu } from '@/shared/ui/Icons/IconMenu';
 import cn from 'classnames';
 import { useState } from 'react';
 import { NavLink } from 'react-router';
@@ -20,6 +21,10 @@ const Navbar = ({ menu }: HeaderColumnProps) => {
     'fixed top-0 left-0 w-64 bg-[#140C1F] h-full transform transition-transform duration-300 ease-in-out z-50',
     'md:static md:translate-x-0 md:w-auto md:h-auto md:bg-transparent md:flex md:flex-row md:items-center md:justify-center md:backdrop-blur-3xl md:from-white/10 md:to-white/0 md:bg-transparent md:bg-gradient-to-b from-white/10 to-white/0 md:backdrop-blur-3xl',
     isOpen ? 'translate-x-0' : '-translate-x-full'
+  );
+  const classesBtn = cn(
+    'md:hidden block w-10 h-10 p-0',
+    isOpen ? 'hidden' : ''
   );
 
   return (
@@ -44,14 +49,17 @@ const Navbar = ({ menu }: HeaderColumnProps) => {
             </li>
           ))}
         </ul>
+        <button
+          className="md:hidden block w-5 h-5 absolute top-3 right-3"
+          onClick={() => setOpen(!isOpen)}
+        >
+          <IconClose className="w-5 h-5" />
+        </button>
       </nav>
 
       {/* Кнопка бургера */}
-      <button
-        className="md:hidden block w-10 h-10 p-0"
-        onClick={() => setOpen(!isOpen)}
-      >
-        <IconMenu className="w-10 h-10" />
+      <button className={classesBtn} onClick={() => setOpen(!isOpen)}>
+        <IconMenu className="w-7 h-7 sm:w-10 sm:h-10" />
       </button>
     </>
   );

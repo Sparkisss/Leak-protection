@@ -4,10 +4,10 @@ import Footer from '../Footer/ui/Footer';
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col w-screen items-center justify-center py-5 px-15 mx-auto">
+    <div className="min-h-screen flex flex-col w-full mx-auto p-15">
       <Header />
-      <main className="flex-1 p-4">
-        <Outlet />
+      <main className="flex-1 flex flex-col items-center justify-center w-full">
+        {<Outlet />}
       </main>
       <Footer />
     </div>

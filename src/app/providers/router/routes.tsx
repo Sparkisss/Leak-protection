@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router';
 import AuthPage from '@/pages/AuthPage/AuthPage';
-import DashboardPage from '@/pages/DashboardPage/DashboardPage';
+import DashboardPage from '@/pages/DashboardPage/ui/DashboardPage';
 import SettingsPage from '@/pages/SettingsPage/SettingsPage';
 import StatisticsPage from '@/pages/StatisticsPage/StatisticsPage';
 import NotFoundPage from '@/pages/NotFoundPage/NotFoundPage';

@@ -1,6 +1,14 @@
 /* Переменные, если используешь CSS-переменные */
 @import 'tailwindcss';
 
+.gradientText {
+  background: linear-gradient(to left, #ad1aaf, #f9fafb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
 .flex-center {
   @apply flex items-center justify-center;
 }
