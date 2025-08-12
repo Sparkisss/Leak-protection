@@ -1,11 +1,14 @@
 import Button from '@/shared/ui/Button/Button';
 import { NavLink } from 'react-router';
+import { removeUser } from '../../../entities/user/model/userSlice';
+import { useAppDispatch } from '@/app/providers/store/hooks';
 
-const AuthButton = () => {
+const LogoutButton = () => {
+  const dispatch = useAppDispatch();
   return (
     <article className="flex-center gap-7">
       <NavLink to="/auth">
-        <Button>Auth</Button>
+        <Button onClick={() => dispatch(removeUser())}>Logout</Button>
       </NavLink>
       <img
         className="hidden md:block"
@@ -16,4 +19,4 @@ const AuthButton = () => {
   );
 };
 
-export default AuthButton;
+export default LogoutButton;

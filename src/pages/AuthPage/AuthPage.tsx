@@ -1,21 +1,30 @@
-import AuthButtonsGroup from '@/features/auth/ui/AuthButtonsGroup';
+import { loginUser } from '@/features/auth/lib/firebaseAuth';
+import AuthForm from '@/features/auth/ui/AuthForm';
 import AuthTitle from '@/features/auth/ui/AuthTitle';
-import LoginForm from '@/features/auth/ui/LoginForm';
-import RegistrationForm from '@/features/auth/ui/RegistrationForm';
-import UserProfileBadge from '@/features/auth/ui/UserProfileBadge';
-import { useState } from 'react';
+import UserProfileBadge from '@/entities/user/ui/UserProfileBadge';
+import { useAppDispatch } from '@/app/providers/store/hooks';
+import { useNavigate } from 'react-router';
 
-const AutchPage = () => {
-  const [register, setRegister] = useState<boolean>(false);
+const AuthPage = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogin = (email: string, password: string) =>
+    loginUser(email, password, dispatch).then(() => navigate('/'));
 
   return (
-    <main className="h-screen w-screen">
+    <main className="h-full w-screen">
       <UserProfileBadge />
       <AuthTitle />
-      {register ? <RegistrationForm /> : <LoginForm />}
-      <AuthButtonsGroup setRegister={() => setRegister(prev => !prev)} />
+      <AuthForm
+        fields={[
+          { name: 'email', placeholder: 'Email', type: 'email' },
+          { name: 'password', placeholder: 'Password', type: 'password' },
+        ]}
+        onSubmit={data => handleLogin(data.email, data.password)}
+      />
     </main>
   );
 };
 
-export default AutchPage;
+export default AuthPage;

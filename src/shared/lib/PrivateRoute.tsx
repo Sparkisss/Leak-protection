@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router';
-import { useIsAuthenticated } from './auth';
 import type { JSX } from 'react';
+import { useAuth } from '@/features/auth/model/useAuth';
 
 type Props = {
   children: JSX.Element;
@@ -8,9 +8,9 @@ type Props = {
 
 export const PrivateRoute = ({ children }: Props) => {
   const location = useLocation();
-  const auth = useIsAuthenticated();
+  const { isAuth } = useAuth();
 
-  if (!auth) {
+  if (!isAuth) {
     return <Navigate to="/auth" replace state={{ from: location }} />;
   }
 
