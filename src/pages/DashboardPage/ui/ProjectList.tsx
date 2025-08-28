@@ -1,6 +1,5 @@
 import { Card } from '@/shared/ui/Card/Card';
 import ProjectSite from '@/entities/projectSite/ui/ProjectSite';
-
 interface ListItem {
   id: number;
   title: string;
@@ -8,7 +7,6 @@ interface ListItem {
   img: string;
   styles: string;
 }
-
 interface ProjectListProps {
   listOfObjects: ListItem[];
 }

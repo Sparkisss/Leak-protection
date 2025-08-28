@@ -1,7 +1,4 @@
-export const IconManualMode = ({
-  className = 'w-15 h-15 lg:w-25 lg:h-25 xl:w-38 xl:h-38 mb-8 fill-[#F81DFB] border-2 rounded-full p-3 lg:p-6 bg-gray-300 backdrop-blur-3xl',
-  ...props
-}) => (
+export const IconManualMode = ({ className = '', ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"

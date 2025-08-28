@@ -2,7 +2,7 @@ import { loginUser } from '@/features/auth/lib/firebaseAuth';
 import AuthForm from '@/features/auth/ui/AuthForm';
 import AuthTitle from '@/features/auth/ui/AuthTitle';
 import UserProfileBadge from '@/entities/user/ui/UserProfileBadge';
-import { useAppDispatch } from '@/app/providers/store/hooks';
+import { useAppDispatch } from '@/shared/lib/store/hooks';
 import { useNavigate } from 'react-router';
 
 const AuthPage = () => {

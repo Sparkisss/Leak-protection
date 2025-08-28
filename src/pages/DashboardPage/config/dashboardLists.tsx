@@ -1,8 +1,11 @@
-import { IconManualMode } from '@/shared/ui/Icons/IconManualMode';
-import { IconAutoMode } from '@/shared/ui/Icons/IconAutoMode';
-import { IconAlarm } from '@/shared/ui/Icons/IconAlarm';
-import { IconOpen } from '@/shared/ui/Icons/IconOpen';
-import { IconDown } from '@/shared/ui/Icons/IconDown';
+import type { Mode } from '@/entities/device/model/types';
+
+interface ListItem {
+  id: number;
+  mode: Mode;
+  icon: 'manual' | 'auto';
+  title: string;
+}
 
 export const listOfObjects = [
   {
@@ -30,45 +33,34 @@ export const listOfObjects = [
       'z-1 translate-x-10 translate-y-5 scale-[0.9] opacity-80 absolute sm:translate-y-0 sm:translate-x-10 md:translate-y-10 md:translate-x-18 lg:translate-x-25 xl:translate-x-30',
   },
 ];
-export const listOfMods = [
-  { id: 1, mode: 0, icon: <IconAutoMode />, title: 'auto' },
+export const listOfMods: ListItem[] = [
+  { id: 1, mode: 0, icon: 'auto' as const, title: 'auto' },
   {
     id: 2,
     mode: 1,
-    icon: <IconManualMode />,
+    icon: 'manual' as const,
     title: 'manual valve 1 open',
   },
   {
     id: 3,
     mode: 2,
-    icon: <IconManualMode />,
+    icon: 'manual' as const,
     title: 'manual valve 1 close',
   },
   {
     id: 4,
     mode: 3,
-    icon: <IconManualMode />,
+    icon: 'manual' as const,
     title: 'manual valve 2 open',
   },
   {
     id: 5,
     mode: 4,
-    icon: <IconManualMode />,
+    icon: 'manual' as const,
     title: 'manual valve 2 close',
   },
 ];
-export const listOfEvents = [
-  { id: 1, mode: 0, icon: <IconAlarm />, title: 'Reset Alarm' },
-  {
-    id: 2,
-    mode: 1,
-    icon: <IconOpen />,
-    title: 'Valve open',
-  },
-  {
-    id: 3,
-    mode: 2,
-    icon: <IconDown />,
-    title: 'Valve close',
-  },
+export const listOfEvents: ListItem[] = [
+  { id: 6, mode: 5, icon: 'manual' as const, title: 'Reset Alarm' },
+  { id: 7, mode: 6, icon: 'manual' as const, title: 'Valve' },
 ];

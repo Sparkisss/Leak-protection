@@ -1,7 +1,7 @@
 import Button from '@/shared/ui/Button/Button';
 import { NavLink } from 'react-router';
 import { removeUser } from '../../../entities/user/model/userSlice';
-import { useAppDispatch } from '@/app/providers/store/hooks';
+import { useAppDispatch } from '@/shared/lib/store/hooks';
 
 const LogoutButton = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +12,7 @@ const LogoutButton = () => {
       </NavLink>
       <img
         className="hidden md:block"
-        src="/public/userLogo/userProfile.png"
+        src="/userLogo/userProfile.png"
         alt="user icon"
       />
     </article>
