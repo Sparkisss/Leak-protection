@@ -1,5 +1,5 @@
 import { getUser } from './selectors';
-import { useAppSelector } from '@/app/providers/store/hooks';
+import { useAppSelector } from '@/shared/lib/store/hooks';
 
 export function useAuth() {
   const { email, token, id } = useAppSelector(getUser);
