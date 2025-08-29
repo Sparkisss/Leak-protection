@@ -1,5 +1,5 @@
 import DashboardHeader from './DashboardHeader';
-import { Divider } from '../../../shared/ui/Divider/Divider';
+import { Divider } from '@/shared/ui/Divider/Divider';
 import ProjectList from './ProjectList';
 import SectionTitle from '@/shared/ui/SectionTitle/SectionTitle';
 import {
@@ -7,7 +7,7 @@ import {
   listOfMods,
   listOfEvents,
 } from '../config/dashboardLists';
-import DeviceMode from '../../../entities/device/ui/DeviceMode';
+import DeviceMode from '../../../features/device/ui/DeviceMode';
 import { useAppSelector } from '@/shared/lib/store/hooks';
 import { selectDeviceLoadingStatus } from '@/entities/device/model/selectors';
 import { useEffect } from 'react';

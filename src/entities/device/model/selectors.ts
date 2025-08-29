@@ -1,6 +1,6 @@
 import type { RootState } from '@/app/providers/store/store';
 import { createSelector } from '@reduxjs/toolkit';
-import type { DeviceStatusState, SensorState } from './types';
+import type { DeviceStatusState, Mode, SensorState } from './types';
 
 // базовый селектор
 export const selectDeviceSlice = (state: RootState) => state.device;
@@ -66,4 +66,29 @@ export const selectDeviceError = createSelector(
 export const selectDeviceConnection = createSelector(
   selectDeviceSlice,
   slice => slice.isConnected
+);
+
+export const selectDeviceStates = createSelector(
+  [
+    selectLakeStatus,
+    selectRelay1Open,
+    selectRelay1Close,
+    selectRelay2Open,
+    selectRelay2Close,
+  ],
+  (
+    sensor,
+    relay1Open,
+    relay1Close,
+    relay2Open,
+    relay2Close
+  ): Record<Mode, boolean> => ({
+    0: sensor,
+    1: relay1Open,
+    2: relay1Close,
+    3: relay2Open,
+    4: relay2Close,
+    5: sensor,
+    6: sensor,
+  })
 );

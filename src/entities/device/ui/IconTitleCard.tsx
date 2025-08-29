@@ -13,6 +13,7 @@ interface IconTitleCardProps {
   };
   alarm: boolean;
   isActive: boolean;
+  state: boolean;
   onClick: () => void;
 }
 
@@ -25,15 +26,22 @@ const IconTitleCard = ({
   obj,
   alarm,
   isActive,
+  state,
   onClick,
 }: IconTitleCardProps) => {
   const Icon = iconsMap[obj.icon];
 
   return (
     <section
-      className="flex flex-col h-full justify-center items-center"
+      className="flex flex-col h-full justify-center items-center relative"
       onClick={onClick}
     >
+      <div
+        className={cn(
+          'absolute -right-1.5 -top-2.5 w-3 h-3 rounded-full',
+          state ? 'bg-red-600' : 'bg-green-600'
+        )}
+      />
       <Icon
         className={cn(
           'w-15 h-15 lg:w-25 lg:h-25 xl:w-38 xl:h-38 mb-8 border-2 rounded-full p-3 lg:p-6 bg-gray-300 backdrop-blur-3xl',

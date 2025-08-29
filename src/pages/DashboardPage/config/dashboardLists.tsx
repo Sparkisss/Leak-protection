@@ -34,7 +34,7 @@ export const listOfObjects = [
   },
 ];
 export const listOfMods: ListItem[] = [
-  { id: 1, mode: 0, icon: 'auto' as const, title: 'auto' },
+  { id: 1, mode: 0, icon: 'auto' as const, title: 'auto mode' },
   {
     id: 2,
     mode: 1,
