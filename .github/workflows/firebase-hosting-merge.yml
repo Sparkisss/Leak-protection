@@ -20,7 +20,7 @@ jobs:
           node-version: 20
 
       # Установим зависимости
-      - run: npm ci
+      - run: npm install
 
       # Соберем проект
       - run: npm run build
