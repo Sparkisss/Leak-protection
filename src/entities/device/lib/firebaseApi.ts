@@ -31,20 +31,51 @@ export async function setRelayByMode(value: number) {
 }
 
 // read data
-export function subscribeToDevice(callback: (data: DeviceStatusState) => void) {
+export function subscribeToDevice(
+  callback: (data: DeviceStatusState | null) => void
+) {
   const deviceRef = ref(db, 'device');
   const unsubscribe = onValue(deviceRef, snapshot => {
     const data = snapshot.val();
-    if (data) callback(data);
+    if (data && typeof data === 'object' && 'mode' in data)
+      callback(data as DeviceStatusState);
+    else callback(null);
   });
   return unsubscribe;
 }
 
-export function subscribeToSensor(callback: (data: SensorState) => void) {
+export function subscribeToSensor(
+  callback: (data: SensorState | null) => void
+) {
   const sensorRef = ref(db, 'sensor');
   const unsubscribe = onValue(sensorRef, snapshot => {
     const data = snapshot.val();
-    if (data) callback(data);
+    if (data && typeof data === 'object' && 'lake' in data)
+      callback(data as SensorState);
+    else callback(null);
   });
+  return unsubscribe;
+}
+
+export function subscribeToDB(callback: (isConnected: boolean) => void) {
+  const connectedRef = ref(db, '.info/connected');
+
+  const unsubscribe = onValue(connectedRef, snapshot => {
+    callback(!!snapshot.val());
+  });
+
+  return unsubscribe;
+}
+
+export function subscribeToDeviceConnectionStatus(
+  callback: (isDeviceConnected: number) => void
+) {
+  const connectedRef = ref(db, 'esp8266/status/lastSeen');
+  const unsubscribe = onValue(connectedRef, snapshot => {
+    const data = snapshot.val();
+    if (typeof data === 'number') callback(data);
+    else callback(0);
+  });
+
   return unsubscribe;
 }

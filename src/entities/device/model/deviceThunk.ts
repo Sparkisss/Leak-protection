@@ -4,13 +4,23 @@ import {
   setAlarmStatus,
   setDeviceMode,
   setRelayByMode,
+  subscribeToDB,
   subscribeToDevice,
+  subscribeToDeviceConnectionStatus,
   subscribeToSensor,
 } from '../lib/firebaseApi';
-import { updateDeviceState, updateSensorState } from './deviceSlice';
+import {
+  clearDeviceData,
+  updateConnectedState,
+  updateDeviceState,
+  updateSensorState,
+  updateConnectedDeviceState,
+} from './deviceSlice';
 
 let unsubscribeDevice: (() => void) | null = null;
 let unsubscribeSensor: (() => void) | null = null;
+let unsubscribeConnectedToDB: (() => void) | null = null;
+let unsubscribeConnectedDeviceToDB: (() => void) | null = null;
 
 // write data
 export const updateDeviceMode = createAsyncThunk<
@@ -67,15 +77,33 @@ export const startDeviceListeners = createAsyncThunk(
   'device/startListeners',
   (_, { dispatch }) => {
     if (!unsubscribeDevice) {
-      unsubscribeDevice = subscribeToDevice((data: DeviceStatusState) => {
-        dispatch(updateDeviceState(data));
-      });
+      unsubscribeDevice = subscribeToDevice(
+        (data: DeviceStatusState | null) => {
+          if (data) dispatch(updateDeviceState(data));
+          else dispatch(clearDeviceData());
+        }
+      );
     }
 
     if (!unsubscribeSensor) {
-      unsubscribeSensor = subscribeToSensor((data: SensorState) => {
-        dispatch(updateSensorState(data));
+      unsubscribeSensor = subscribeToSensor((data: SensorState | null) => {
+        if (data) dispatch(updateSensorState(data));
+        else dispatch(clearDeviceData());
       });
+    }
+
+    if (!unsubscribeConnectedToDB) {
+      unsubscribeConnectedToDB = subscribeToDB((isConnected: boolean) => {
+        dispatch(updateConnectedState(isConnected));
+      });
+    }
+
+    if (!unsubscribeConnectedDeviceToDB) {
+      unsubscribeConnectedDeviceToDB = subscribeToDeviceConnectionStatus(
+        (isDeviceConnected: number) => {
+          dispatch(updateConnectedDeviceState(isDeviceConnected));
+        }
+      );
     }
 
     return true;
@@ -92,6 +120,15 @@ export const stopDeviceListeners = createAsyncThunk(
     if (unsubscribeSensor) {
       unsubscribeSensor();
       unsubscribeSensor = null;
+    }
+    if (unsubscribeConnectedToDB) {
+      unsubscribeConnectedToDB();
+      unsubscribeConnectedToDB = null;
+    }
+
+    if (unsubscribeConnectedDeviceToDB) {
+      unsubscribeConnectedDeviceToDB();
+      unsubscribeConnectedDeviceToDB = null;
     }
     return true;
   }

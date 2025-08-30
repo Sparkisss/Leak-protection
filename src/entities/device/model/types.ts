@@ -24,5 +24,6 @@ export interface DeviceSliceState {
   sensor: SensorState | null;
   error: string | null;
   isConnected: boolean; // флаг подключения
+  lastSeen: number;
   commandStatus: CommandStatus;
 }

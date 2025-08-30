@@ -92,3 +92,8 @@ export const selectDeviceStates = createSelector(
     6: sensor,
   })
 );
+
+export const selectIsDeviceOnline = createSelector(
+  selectDeviceSlice,
+  slice => slice.lastSeen
+);

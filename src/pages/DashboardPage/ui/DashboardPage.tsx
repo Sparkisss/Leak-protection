@@ -8,16 +8,11 @@ import {
   listOfEvents,
 } from '../config/dashboardLists';
 import DeviceMode from '../../../features/device/ui/DeviceMode';
-import { useAppSelector } from '@/shared/lib/store/hooks';
-import { selectDeviceLoadingStatus } from '@/entities/device/model/selectors';
-import { useEffect } from 'react';
 import { Spinner } from '@/shared/ui/Spinner/Spinner';
+import { useDeviceOnlineStatus } from '@/entities/device/model/useDeviceOnlineStatus';
 
 const DashboardPage = () => {
-  const loadingStatus = useAppSelector(selectDeviceLoadingStatus);
-  useEffect(() => {
-    console.log(loadingStatus);
-  }, [loadingStatus]);
+  const { isOnline, loadingStatus, isConnectedToDB } = useDeviceOnlineStatus();
 
   return (
     <>
@@ -31,14 +26,22 @@ const DashboardPage = () => {
           info="You can change device mode"
           title="Mods that the device supports"
         />
-        {loadingStatus === 'pending' ||
-        loadingStatus === 'waitingConfirmation' ? (
-          <Spinner />
+        {isConnectedToDB ? (
+          loadingStatus === 'pending' ||
+          loadingStatus === 'waitingConfirmation' ? (
+            <Spinner />
+          ) : isOnline ? (
+            <>
+              <DeviceMode list={listOfMods} />
+              <DeviceMode list={listOfEvents} />
+            </>
+          ) : (
+            <div className="w-full flex justify-center align-middle">
+              🔴 Offline
+            </div>
+          )
         ) : (
-          <>
-            <DeviceMode list={listOfMods} />
-            <DeviceMode list={listOfEvents} />
-          </>
+          <div>Offline mode</div>
         )}
       </section>
       <Divider />

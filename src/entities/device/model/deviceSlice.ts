@@ -4,8 +4,6 @@ import {
   updateDeviceMode,
   updateAlarmStatus,
   updateRelayStatus,
-  startDeviceListeners,
-  stopDeviceListeners,
 } from './deviceThunk';
 
 const initialState: DeviceSliceState = {
@@ -13,6 +11,7 @@ const initialState: DeviceSliceState = {
   sensor: null,
   error: null,
   isConnected: false,
+  lastSeen: 0,
   commandStatus: 'idle',
 };
 
@@ -26,6 +25,12 @@ export const deviceSlice = createSlice({
     },
     updateSensorState: (state, action: PayloadAction<SensorState>) => {
       state.sensor = action.payload;
+    },
+    updateConnectedState: (state, action: PayloadAction<boolean>) => {
+      state.isConnected = action.payload;
+    },
+    updateConnectedDeviceState: (state, action: PayloadAction<number>) => {
+      state.lastSeen = action.payload;
     },
 
     clearDeviceData: state => {
@@ -82,13 +87,6 @@ export const deviceSlice = createSlice({
       state.error = action.payload as string;
     });
 
-    // === Device Listeners ===
-    builder.addCase(startDeviceListeners.fulfilled, state => {
-      state.isConnected = true;
-    });
-    builder.addCase(stopDeviceListeners.fulfilled, state => {
-      state.isConnected = false;
-    });
     // Когда реально пришёл апдейт от прибора
     builder.addMatcher(
       action => action.type === updateDeviceState.type,
@@ -100,7 +98,12 @@ export const deviceSlice = createSlice({
   },
 });
 
-export const { updateDeviceState, updateSensorState, clearDeviceData } =
-  deviceSlice.actions;
+export const {
+  updateDeviceState,
+  updateSensorState,
+  updateConnectedState,
+  updateConnectedDeviceState,
+  clearDeviceData,
+} = deviceSlice.actions;
 
 export const deviceReducer = deviceSlice.reducer;
