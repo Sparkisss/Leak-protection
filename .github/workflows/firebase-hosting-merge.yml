@@ -4,8 +4,10 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - master # если у тебя основная ветка master, оставь так
-      # - main    # если у тебя main, поменяй тут
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build_and_deploy:
@@ -23,10 +25,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+        # Проверяем линтинг кода
+      - name: Lint code
+        run: npm run lint
+
       # Соберем проект
       - name: Build project
         run: npm run build
-
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}
+          VITE_FIREBASE_DATABASE_URL: ${{ secrets.VITE_FIREBASE_DATABASE_URL }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+          VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}
+          VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
       # Деплой на Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
