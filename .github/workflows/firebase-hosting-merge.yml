@@ -4,7 +4,7 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - master   # если у тебя основная ветка master, оставь так
+      - master # если у тебя основная ветка master, оставь так
       # - main    # если у тебя main, поменяй тут
 
 jobs:
@@ -17,12 +17,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
+          cache: 'npm'
 
       # Установим зависимости
-      - run: npm install
+      - name: Install dependencies
+        run: npm ci
 
       # Соберем проект
-      - run: npm run build
+      - name: Build project
+        run: npm run build
 
       # Деплой на Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
