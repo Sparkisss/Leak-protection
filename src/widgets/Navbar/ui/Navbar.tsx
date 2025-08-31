@@ -1,6 +1,6 @@
 import { TYPOGRAPHY } from '@/shared/const/typography';
-import { IconClose } from '@/shared/ui/Icons/IconClose';
-import { IconMenu } from '@/shared/ui/Icons/IconMenu';
+import { IconClose } from '@/shared/ui/icons/IconClose';
+import { IconMenu } from '@/shared/ui/icons/IconMenu';
 import cn from 'classnames';
 import { useState } from 'react';
 import { NavLink } from 'react-router';
