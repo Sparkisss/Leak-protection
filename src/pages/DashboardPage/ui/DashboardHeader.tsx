@@ -8,7 +8,7 @@ const DashboardHeader = () => {
   return (
     <section className="w-4/5 mb-12 sm:mb-0 sm:w-3/6">
       <div className={headClasses}>
-        EXPLORE, CREATE AND SELL YOUR NFT’S ON SHIHAMI
+        YOU PROTECTION YOU SECURITY YOU SMART HOUSE
       </div>
       <div className={textClasses}>
         Shihami is the World’s first and largest NFT/Avatar marketplace
