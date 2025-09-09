@@ -7,7 +7,7 @@ import {
   listOfMods,
   listOfEvents,
 } from '../config/dashboardLists';
-import DeviceMode from '../../../features/device/ui/DeviceMode';
+import DeviceMode from '@/features/device/ui/DeviceMode';
 import { Spinner } from '@/shared/ui/Spinner/Spinner';
 import { useDeviceOnlineStatus } from '@/entities/device/model/useDeviceOnlineStatus';
 
@@ -21,16 +21,17 @@ const DashboardPage = () => {
         <ProjectList listOfObjects={listOfObjects} />
       </section>
       <Divider />
-      <section>
+      <section className="relative">
         <SectionTitle
           info="You can change device mode"
           title="Mods that the device supports"
         />
+        {loadingStatus === 'pending' ||
+        loadingStatus === 'waitingConfirmation' ? (
+          <Spinner />
+        ) : null}
         {isConnectedToDB ? (
-          loadingStatus === 'pending' ||
-          loadingStatus === 'waitingConfirmation' ? (
-            <Spinner />
-          ) : isOnline ? (
+          isOnline ? (
             <>
               <DeviceMode list={listOfMods} />
               <DeviceMode list={listOfEvents} />
