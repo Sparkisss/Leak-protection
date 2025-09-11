@@ -10,9 +10,9 @@ export const Spinner = ({
   label,
 }: SpinnerProps) => {
   const sizeClasses = {
-    sm: 'w-6 h-6 border-2',
-    md: 'w-10 h-10 border-3',
-    lg: 'w-16 h-16 border-4',
+    sm: 'w-16 h-16 border-5',
+    md: 'w-22 h-22 border-7',
+    lg: 'w-30 h-30 border-9',
   };
 
   const colorClasses = {
@@ -22,7 +22,7 @@ export const Spinner = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <div className="flex flex-col items-center justify-center gap-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 w-full h-full">
       <div
         className={`
           animate-spin rounded-full

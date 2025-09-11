@@ -10,9 +10,13 @@ import {
 import DeviceMode from '@/features/device/ui/DeviceMode';
 import { Spinner } from '@/shared/ui/Spinner/Spinner';
 import { useDeviceOnlineStatus } from '@/entities/device/model/useDeviceOnlineStatus';
+import { Transition } from 'react-transition-group';
+import cn from 'classnames';
+import { useRef } from 'react';
 
 const DashboardPage = () => {
   const { isOnline, loadingStatus, isConnectedToDB } = useDeviceOnlineStatus();
+  const spinnerRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -26,10 +30,31 @@ const DashboardPage = () => {
           info="You can change device mode"
           title="Mods that the device supports"
         />
-        {loadingStatus === 'pending' ||
-        loadingStatus === 'waitingConfirmation' ? (
-          <Spinner />
-        ) : null}
+        <Transition
+          in={
+            loadingStatus === 'pending' ||
+            loadingStatus === 'waitingConfirmation'
+          }
+          timeout={500}
+          nodeRef={spinnerRef}
+          mountOnEnter
+          unmountOnExit
+        >
+          {state => (
+            <div
+              ref={spinnerRef}
+              className={cn(
+                'flex justify-center items-center transition-all duration-500 ease-in-out',
+                state === 'entering' && 'opacity-0',
+                state === 'entered' && 'opacity-100',
+                state === 'exiting' && 'opacity-0',
+                state === 'exited' && 'opacity-0'
+              )}
+            >
+              <Spinner />
+            </div>
+          )}
+        </Transition>
         {isConnectedToDB ? (
           isOnline ? (
             <>
