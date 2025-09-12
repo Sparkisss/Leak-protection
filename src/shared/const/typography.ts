@@ -3,7 +3,7 @@ export const TYPOGRAPHY = {
   h2: 'font-oxanium font-semibold text-lg md:text-5xl lg:text-6xl leading-none tracking-normal capitalize',
   body: 'font-lato font-light text-sm sm:text-md lg:text-2xl leading-none tracking-normal capitalize"',
   caption:
-    'font-oxanium font-medium text-sm sm:text-md lg:text-2xl leading-none tracking-normal text-center capitalize',
+    'font-oxanium font-medium text-sm sm:text-md lg:text-2xl leading-none tracking-normal text-center capitalize mb-2',
   button:
     'font-oxanium font-medium text-2xl leading-none tracking-normal text-center capitalize',
   textGradient: 'linear-gradient(135deg, #FFFFFF, #F81DFB)',

@@ -1,13 +1,13 @@
 import { Card } from '@/shared/ui/Card/Card';
-import type { Mode } from '../../../entities/device/model/types';
+import type { Mode } from '@/entities/module/model/types';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/store/hooks';
 import {
   selectDeviceAlarm,
   selectDeviceMode,
   selectDeviceStates,
-} from '../../../entities/device/model/selectors';
-import IconTitleCard from '../../../entities/device/ui/IconTitleCard';
-import { handleDeviceCommand } from '../../../entities/device/model/deviceLogic';
+} from '@/entities/module/model/selectors';
+import IconTitleCard from '@/shared/ui/IconTitleCard/IconTitleCard';
+import { handleDeviceCommand } from '@/entities/module/model/deviceLogic';
 
 interface ListItem {
   id: number;
@@ -19,7 +19,7 @@ interface CardsGridProps {
   list: ListItem[];
 }
 
-const DeviceMode = ({ list }: CardsGridProps) => {
+const ManageModule = ({ list }: CardsGridProps) => {
   const dispatch = useAppDispatch();
   const alarm = useAppSelector(selectDeviceAlarm);
   const mode = useAppSelector(selectDeviceMode);
@@ -44,4 +44,4 @@ const DeviceMode = ({ list }: CardsGridProps) => {
   );
 };
 
-export default DeviceMode;
+export default ManageModule;

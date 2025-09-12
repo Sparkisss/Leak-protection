@@ -3,8 +3,8 @@ import { db } from '@/shared/lib/firebase';
 import type { DeviceStatusState, SensorState } from '../model/types';
 
 // write data
-export async function setDeviceMode(newMode: number) {
-  const modeRef = ref(db, 'commands/set_mode');
+export async function setDeviceMode(module: string, newMode: number) {
+  const modeRef = ref(db, `object/${module}/commands/set_mode`);
   try {
     await set(modeRef, newMode);
   } catch (error) {
@@ -12,8 +12,8 @@ export async function setDeviceMode(newMode: number) {
   }
 }
 
-export async function setAlarmStatus(newStatus: boolean) {
-  const alarmRef = ref(db, 'commands/reset_alarm');
+export async function setAlarmStatus(module: string, newStatus: boolean) {
+  const alarmRef = ref(db, `object/${module}/commands/reset_alarm`);
   try {
     await set(alarmRef, newStatus);
   } catch (error) {
@@ -21,8 +21,8 @@ export async function setAlarmStatus(newStatus: boolean) {
   }
 }
 
-export async function setRelayByMode(value: number) {
-  const relayRef = ref(db, 'commands/relay');
+export async function setRelayByMode(module: string, value: number) {
+  const relayRef = ref(db, `object/${module}/commands/relay`);
   try {
     await set(relayRef, value);
   } catch (error) {
@@ -32,9 +32,10 @@ export async function setRelayByMode(value: number) {
 
 // read data
 export function subscribeToDevice(
+  module: string,
   callback: (data: DeviceStatusState | null) => void
 ) {
-  const deviceRef = ref(db, 'device');
+  const deviceRef = ref(db, `object/${module}/device`);
   const unsubscribe = onValue(deviceRef, snapshot => {
     const data = snapshot.val();
     if (data && typeof data === 'object' && 'mode' in data)
@@ -45,9 +46,10 @@ export function subscribeToDevice(
 }
 
 export function subscribeToSensor(
+  module: string,
   callback: (data: SensorState | null) => void
 ) {
-  const sensorRef = ref(db, 'sensor');
+  const sensorRef = ref(db, `object/${module}/sensor`);
   const unsubscribe = onValue(sensorRef, snapshot => {
     const data = snapshot.val();
     if (data && typeof data === 'object' && 'lake' in data)
@@ -68,9 +70,10 @@ export function subscribeToDB(callback: (isConnected: boolean) => void) {
 }
 
 export function subscribeToDeviceConnectionStatus(
+  module: string,
   callback: (isDeviceConnected: number) => void
 ) {
-  const connectedRef = ref(db, 'esp8266/status/lastSeen');
+  const connectedRef = ref(db, `object/${module}/esp8266/status/lastSeen`);
   const unsubscribe = onValue(connectedRef, snapshot => {
     const data = snapshot.val();
     if (typeof data === 'number') callback(data);

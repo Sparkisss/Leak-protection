@@ -7,6 +7,7 @@ import {
 } from './deviceThunk';
 
 const initialState: DeviceSliceState = {
+  selectedId: 'leakProtection',
   device: null,
   sensor: null,
   error: null,
@@ -32,6 +33,9 @@ export const deviceSlice = createSlice({
     updateConnectedDeviceState: (state, action: PayloadAction<number>) => {
       state.lastSeen = action.payload;
     },
+    setSelectedDevice: (state, action: PayloadAction<string>) => {
+      state.selectedId = action.payload;
+    },
 
     clearDeviceData: state => {
       state.device = null;
@@ -45,7 +49,7 @@ export const deviceSlice = createSlice({
     builder.addCase(updateDeviceMode.pending, (state, action) => {
       if (state.device) {
         // оптимистичное обновление
-        state.device.mode = action.meta.arg;
+        state.device.mode = action.meta.arg.newMode;
       }
       state.commandStatus = 'pending';
       state.error = null; // сброс старой ошибки
@@ -61,7 +65,7 @@ export const deviceSlice = createSlice({
     // === Update Alarm ===
     builder.addCase(updateAlarmStatus.pending, (state, action) => {
       if (state.device) {
-        state.device.alarm = action.meta.arg;
+        state.device.alarm = action.meta.arg.status;
       }
       state.commandStatus = 'pending';
       state.error = null; // сброс старой ошибки
