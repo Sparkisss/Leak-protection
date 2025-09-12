@@ -18,11 +18,14 @@ export const handleDeviceCommand = (
   if (mode < 0 || mode > 4) {
     throw new Error('Incorrect mode value');
   }
-  if (id === 6) dispatch(updateAlarmStatus(true));
+  if (id === 6)
+    dispatch(updateAlarmStatus({ module: 'leakProtection', status: true }));
   if (id === 7) {
     if (mode === 0) {
       throw new Error('Relay mode must be between 1 and 4.');
-    } else dispatch(updateRelayStatus(mode));
+    } else
+      dispatch(updateRelayStatus({ module: 'leakProtection', value: mode }));
   }
-  if (id > 0 && id <= 5) dispatch(updateDeviceMode(curMode));
+  if (id > 0 && id <= 5)
+    dispatch(updateDeviceMode({ module: 'leakProtection', newMode: curMode }));
 };

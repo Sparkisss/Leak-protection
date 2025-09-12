@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../shared/lib/store/hooks';
 import {
   startDeviceListeners,
   stopDeviceListeners,
-} from '@/entities/device/model/deviceThunk';
+} from '@/entities/module/model/deviceThunk';
 
 interface DeviceProps {
   children: ReactNode;

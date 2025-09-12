@@ -1,15 +1,11 @@
 import DashboardHeader from './DashboardHeader';
 import { Divider } from '@/shared/ui/Divider/Divider';
-import ProjectList from './ProjectList';
+import ModuleList from '@/entities/moduleList/ui/ModuleList';
 import SectionTitle from '@/shared/ui/SectionTitle/SectionTitle';
-import {
-  listOfObjects,
-  listOfMods,
-  listOfEvents,
-} from '../config/dashboardLists';
-import DeviceMode from '@/features/device/ui/DeviceMode';
+import { listOfMods, listOfEvents } from '../config/dashboardLists';
+import DeviceMode from '@/features/module/ui/ManageModule';
 import { Spinner } from '@/shared/ui/Spinner/Spinner';
-import { useDeviceOnlineStatus } from '@/entities/device/model/useDeviceOnlineStatus';
+import { useDeviceOnlineStatus } from '@/entities/module/model/useDeviceOnlineStatus';
 import { Transition } from 'react-transition-group';
 import cn from 'classnames';
 import { useRef } from 'react';
@@ -22,7 +18,7 @@ const DashboardPage = () => {
     <>
       <section className="flex flex-col items-center relative mb-60 sm:mb-20 lg:mb-40 sm:flex-row sm:gap-8 sm:items-baseline">
         <DashboardHeader />
-        <ProjectList listOfObjects={listOfObjects} />
+        <ModuleList />
       </section>
       <Divider />
       <section className="relative">
@@ -62,7 +58,7 @@ const DashboardPage = () => {
               <DeviceMode list={listOfEvents} />
             </>
           ) : (
-            <div className="w-full flex justify-center align-middle">
+            <div className="w-full flex justify-center align-middle p-10">
               🔴 Offline
             </div>
           )
