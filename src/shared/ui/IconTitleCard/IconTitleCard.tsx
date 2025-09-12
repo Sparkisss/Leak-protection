@@ -2,7 +2,7 @@ import { TYPOGRAPHY } from '@/shared/const/typography';
 import { IconManualMode } from '@/shared/ui/icons/IconManualMode';
 import { IconAutoMode } from '@/shared/ui/icons/IconAutoMode';
 import cn from 'classnames';
-import type { Mode } from '@/entities/device/model/types';
+import type { Mode } from '@/entities/module/model/types';
 
 interface IconTitleCardProps {
   obj: {

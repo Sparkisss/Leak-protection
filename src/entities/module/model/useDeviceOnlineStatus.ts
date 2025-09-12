@@ -15,8 +15,8 @@ export const useDeviceOnlineStatus = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = Date.now();
-      setIsOnline(lastSeen ? now - lastSeen < 200000 : false);
-    }, 50000);
+      setIsOnline(lastSeen ? now - lastSeen < 120000 : false);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, [lastSeen]);

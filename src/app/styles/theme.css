@@ -8,7 +8,6 @@
   background-clip: text;
   color: transparent;
 }
-
 .flex-center {
   @apply flex items-center justify-center;
 }
