@@ -1,9 +1,10 @@
 import { TYPOGRAPHY } from '@/shared/const/typography';
 import type { ModuleList } from '../model/types';
 
-const ModuleCard = ({ id, type, img, controller }: ModuleList) => {
+const ModuleCard = ({ id, type, img, controller, onClick }: ModuleList) => {
   return (
     <section
+      onClick={onClick}
       key={id}
       className="flex flex-col justify-between backdrop-blur-3xl w-18 sm:w-20 md:w-42 lg:w-full"
     >

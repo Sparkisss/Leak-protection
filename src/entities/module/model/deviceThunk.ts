@@ -22,11 +22,7 @@ import {
   updateSensorState,
   updateConnectedDeviceState,
 } from './deviceSlice';
-
-let unsubscribeDevice: (() => void) | null = null;
-let unsubscribeSensor: (() => void) | null = null;
-let unsubscribeConnectedToDB: (() => void) | null = null;
-let unsubscribeConnectedDeviceToDB: (() => void) | null = null;
+import { subscriptionManager } from './subscriptionManager';
 
 // write data
 export const updateDeviceMode = createAsyncThunk<
@@ -84,40 +80,45 @@ export const updateRelayStatus = createAsyncThunk<
 // read data
 export const startDeviceListeners = createAsyncThunk(
   'device/startListeners',
-  (_, { dispatch }) => {
-    if (!unsubscribeDevice) {
-      unsubscribeDevice = subscribeToDevice(
-        'leakProtection',
+  (deviceId: string, { dispatch }) => {
+    // device
+    if (!subscriptionManager.get(`${deviceId}:device`)) {
+      const unsub = subscribeToDevice(
+        deviceId,
         (data: DeviceStatusState | null) => {
           if (data) dispatch(updateDeviceState(data));
           else dispatch(clearDeviceData());
         }
       );
+      subscriptionManager.set(`${deviceId}:device`, unsub);
     }
 
-    if (!unsubscribeSensor) {
-      unsubscribeSensor = subscribeToSensor(
-        'leakProtection',
-        (data: SensorState | null) => {
-          if (data) dispatch(updateSensorState(data));
-          else dispatch(clearDeviceData());
-        }
-      );
+    // sensor
+    if (!subscriptionManager.get(`${deviceId}:sensor`)) {
+      const unsub = subscribeToSensor(deviceId, (data: SensorState | null) => {
+        if (data) dispatch(updateSensorState(data));
+        else dispatch(clearDeviceData());
+      });
+      subscriptionManager.set(`${deviceId}:sensor`, unsub);
     }
 
-    if (!unsubscribeConnectedToDB) {
-      unsubscribeConnectedToDB = subscribeToDB((isConnected: boolean) => {
+    // DB connection
+    if (!subscriptionManager.get(`${deviceId}:connectedToDB`)) {
+      const unsub = subscribeToDB((isConnected: boolean) => {
         dispatch(updateConnectedState(isConnected));
       });
+      subscriptionManager.set(`${deviceId}:connectedToDB`, unsub);
     }
 
-    if (!unsubscribeConnectedDeviceToDB) {
-      unsubscribeConnectedDeviceToDB = subscribeToDeviceConnectionStatus(
-        'leakProtection',
+    // Device connection status
+    if (!subscriptionManager.get(`${deviceId}:connectedDeviceToDB`)) {
+      const unsub = subscribeToDeviceConnectionStatus(
+        deviceId,
         (isDeviceConnected: number) => {
           dispatch(updateConnectedDeviceState(isDeviceConnected));
         }
       );
+      subscriptionManager.set(`${deviceId}:connectedDeviceToDB`, unsub);
     }
 
     return true;
@@ -126,24 +127,8 @@ export const startDeviceListeners = createAsyncThunk(
 
 export const stopDeviceListeners = createAsyncThunk(
   'device/stopListeners',
-  () => {
-    if (unsubscribeDevice) {
-      unsubscribeDevice();
-      unsubscribeDevice = null;
-    }
-    if (unsubscribeSensor) {
-      unsubscribeSensor();
-      unsubscribeSensor = null;
-    }
-    if (unsubscribeConnectedToDB) {
-      unsubscribeConnectedToDB();
-      unsubscribeConnectedToDB = null;
-    }
-
-    if (unsubscribeConnectedDeviceToDB) {
-      unsubscribeConnectedDeviceToDB();
-      unsubscribeConnectedDeviceToDB = null;
-    }
+  (deviceId: string) => {
+    subscriptionManager.clearAllForDevice(deviceId);
     return true;
   }
 );
