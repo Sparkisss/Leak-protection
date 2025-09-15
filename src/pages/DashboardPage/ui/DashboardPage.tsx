@@ -16,7 +16,7 @@ const DashboardPage = () => {
 
   return (
     <>
-      <section className="flex flex-col items-center relative mb-60 sm:mb-20 lg:mb-40 sm:flex-row sm:gap-8 sm:items-baseline">
+      <section className="flex flex-col items-center relative mb-20 lg:mb-45 sm:flex-row sm:gap-18 sm:items-baseline">
         <DashboardHeader />
         <ModuleList />
       </section>

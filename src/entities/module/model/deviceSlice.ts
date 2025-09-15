@@ -107,6 +107,7 @@ export const {
   updateSensorState,
   updateConnectedState,
   updateConnectedDeviceState,
+  setSelectedDevice,
   clearDeviceData,
 } = deviceSlice.actions;
 

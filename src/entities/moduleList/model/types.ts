@@ -3,6 +3,8 @@ export interface ModuleList {
   img: string;
   type: string;
   controller: string;
+  name: string;
+  onClick: () => void;
 }
 
 export interface ModuleListState {

@@ -1,23 +1,25 @@
 import { useEffect, type ReactNode } from 'react';
-import { useAppDispatch } from '../../../shared/lib/store/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../shared/lib/store/hooks';
 import {
   startDeviceListeners,
   stopDeviceListeners,
 } from '@/entities/module/model/deviceThunk';
 
-interface DeviceProps {
-  children: ReactNode;
-}
-
-const DeviceListenersProvider = ({ children }: DeviceProps) => {
+const DeviceListenersProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch();
+  const selectedId = useAppSelector(state => state.device.selectedId);
 
   useEffect(() => {
-    dispatch(startDeviceListeners());
+    if (!selectedId) return;
+    dispatch(startDeviceListeners(selectedId));
+
     return () => {
-      dispatch(stopDeviceListeners());
+      dispatch(stopDeviceListeners(selectedId));
     };
-  }, [dispatch]);
+  }, [dispatch, selectedId]);
 
   return <>{children}</>;
 };
